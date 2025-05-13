@@ -13,8 +13,8 @@ function App() {
   const videoConstraints = {
     width: 640,
     height: 480,
-    facingMode: "user", // <- 테스트용 전면 카메라
-    // facingMode: "environment", // <- 후면 카메라 고정
+    // facingMode: "user", // <- 테스트용 전면 카메라
+    facingMode: "environment", // <- 후면 카메라 고정
   };
 
   const capture = () => {
