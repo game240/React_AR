@@ -45,6 +45,9 @@ function App() {
               audio={false}
               ref={webcamRef}
               screenshotFormat="image/png"
+              screenshotQuality={1}
+              screenshotWidth={MAX_WIDTH}
+              screenshotHeight={MAX_HEIGHT}
               videoConstraints={videoConstraints}
               style={{ width: "100%", maxWidth: "640px" }}
             />
