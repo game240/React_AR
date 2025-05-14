@@ -10,9 +10,14 @@ function App() {
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [capturedImage, setCapturedImage] = useState(null);
 
+  const MAX_WIDTH = 16320;
+  const MAX_HEIGHT = 12240;
+
   const videoConstraints = {
-    width: 640,
-    height: 480,
+    // width: 640,
+    // height: 480,
+    width: { ideal: MAX_WIDTH },
+    height: { ideal: MAX_HEIGHT },
     // facingMode: "user", // <- 테스트용 전면 카메라
     facingMode: "environment", // <- 후면 카메라 고정
   };
