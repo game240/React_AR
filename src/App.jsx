@@ -1,9 +1,7 @@
 import { useRef, useState } from "react";
 import Webcam from "react-webcam";
 
-import react from "./assets/react.svg";
-
-import "./App.css";
+import react from "./../assets/react.svg";
 
 function App() {
   const webcamRef = useRef(null);
@@ -66,9 +64,8 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <h1>웹캠 잘 나오는 중</h1>
-      <div className="webcam-container" style={{ position: "relative" }}>
+    <main>
+      <div className="w-full h-screen" style={{ position: "relative" }}>
         {isCameraOn && !capturedImage && !fullPhoto && (
           <>
             <Webcam
@@ -79,17 +76,29 @@ function App() {
               screenshotWidth={MAX_WIDTH}
               screenshotHeight={MAX_HEIGHT}
               videoConstraints={videoConstraints}
-              style={{ width: "100%", maxWidth: "640px" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                transform: "rotate(90deg)",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+              }}
             />
             <img
               src={react}
               alt="react"
               style={{
                 position: "absolute",
-                bottom: 0,
-                right: 0,
                 width: "100px",
                 zIndex: 1000,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
               }}
             />
           </>
@@ -115,7 +124,7 @@ function App() {
           </>
         )}
       </div>
-    </div>
+    </main>
   );
 }
 
