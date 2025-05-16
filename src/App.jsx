@@ -1,13 +1,11 @@
 import { useRef, useState } from "react";
 import Webcam from "react-webcam";
 
-import react from "./assets/react.svg";
+import cameraButton from "./assets/camera_button.png";
+import sendMoneyAr from "./assets/send_money_ar.png";
 
-import "./App.css";
-
-function App() {
+function AR() {
   const webcamRef = useRef(null);
-  const [isCameraOn, setIsCameraOn] = useState(true);
   const [capturedImage, setCapturedImage] = useState(null);
 
   const [fullPhoto, setFullPhoto] = useState(null);
@@ -20,8 +18,8 @@ function App() {
     // height: 480,
     width: { ideal: MAX_WIDTH },
     height: { ideal: MAX_HEIGHT },
-    // facingMode: "user", // <- 테스트용 전면 카메라
-    facingMode: "environment", // <- 후면 카메라 고정
+    facingMode: "user", // <- 테스트용 전면 카메라
+    // facingMode: "environment", // <- 후면 카메라 고정
   };
 
   // 풀 해상도 촬영
@@ -66,10 +64,9 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <h1>웹캠 잘 나오는 중</h1>
-      <div className="webcam-container" style={{ position: "relative" }}>
-        {isCameraOn && !capturedImage && !fullPhoto && (
+    <main>
+      <div className="w-full h-screen" style={{ position: "relative" }}>
+        {!capturedImage && !fullPhoto && (
           <>
             <Webcam
               audio={false}
@@ -79,19 +76,26 @@ function App() {
               screenshotWidth={MAX_WIDTH}
               screenshotHeight={MAX_HEIGHT}
               videoConstraints={videoConstraints}
-              style={{ width: "100%", maxWidth: "640px" }}
-            />
-            <img
-              src={react}
-              alt="react"
               style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
                 position: "absolute",
-                bottom: 0,
+                top: 0,
+                left: 0,
                 right: 0,
-                width: "100px",
-                zIndex: 1000,
+                bottom: 0,
               }}
             />
+            <img className="relative z-10" src={sendMoneyAr} alt="sendMoneyAr" />
+            <button
+              className="absolute bottom-[36px] right-1/2 translate-x-1/2 cursor-pointer"
+              onClick={() => {
+                takeFullPhoto();
+              }}
+            >
+              <img className="size-[72px] rotate-90" src={cameraButton} alt="cameraButton" />
+            </button>
           </>
         )}
         {(capturedImage || fullPhoto) && (
@@ -100,23 +104,8 @@ function App() {
           </div>
         )}
       </div>
-      <div className="button-container">
-        <button onClick={() => setIsCameraOn(!isCameraOn)} className="camera-toggle">
-          {isCameraOn ? "카메라 끄기" : "카메라 켜기"}
-        </button>
-        {isCameraOn && (
-          <>
-            <button onClick={capture} className="capture-button">
-              기본 캡처
-            </button>
-            <button onClick={takeFullPhoto} className="capture-button">
-              풀 해상도 촬영
-            </button>
-          </>
-        )}
-      </div>
-    </div>
+    </main>
   );
 }
 
-export default App;
+export default AR;
