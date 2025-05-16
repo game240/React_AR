@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import Webcam from "react-webcam";
 
-import react from "./../assets/react.svg";
+import react from "./assets/react.svg";
 
 function App() {
   const webcamRef = useRef(null);
